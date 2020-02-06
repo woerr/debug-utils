@@ -45,4 +45,4 @@ npm install -g yarn@berry
 
 EXPOSE 22
 
-CMD /bin/bash
+CMD sleep infinity
