@@ -43,6 +43,8 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
 apt-get install -y nodejs && \
 npm install -g yarn@berry
 
+RUN useradd -m weldbook
+
 RUN mkdir /var/run/sshd
 RUN echo 'root:THEPASSWORDYOUCREATED' | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
@@ -54,6 +56,4 @@ ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
 EXPOSE 22
-RUN usr/sbin/sshd -D &
-
-CMD sleep infinity
+CMD ["/usr/sbin/sshd", "-D"]
